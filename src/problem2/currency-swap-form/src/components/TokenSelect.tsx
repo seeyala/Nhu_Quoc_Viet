@@ -22,17 +22,15 @@ const TokenSelect: React.FC<TokenSelectProps> = ({
 }) => {
   return (
     <div className="mb-4">
-      {/* Label cho phần select */}
       <label className="block text-gray-700 font-medium">{label}</label>
 
-      {/* Dropdown select để chọn token */}
       <select
         className="w-full border p-3 mt-2 rounded focus:ring-indigo-500 focus:border-indigo-500"
         value={selectedToken?.value || ''}
         onChange={(e) => {
           const selectedValue = e.target.value;
           const selected = tokens.find((token) => token.value === selectedValue);
-          onChange(selected || null); // Nếu không tìm thấy token thì chọn null
+          onChange(selected || null);
         }}
       >
         <option value="" disabled>
@@ -41,7 +39,6 @@ const TokenSelect: React.FC<TokenSelectProps> = ({
         {tokens.map((token) => (
           <option key={token.value} value={token.value}>
             <div className="flex items-center">
-              {/* Hiển thị biểu tượng token */}
               <img
                 src={token.icon}
                 alt={token.label}
@@ -53,7 +50,6 @@ const TokenSelect: React.FC<TokenSelectProps> = ({
         ))}
       </select>
 
-      {/* Hiển thị biểu tượng token đã chọn nếu có */}
       <div className="mt-2">
         {selectedToken && (
           <div className="flex items-center">

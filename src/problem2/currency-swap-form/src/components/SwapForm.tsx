@@ -82,7 +82,7 @@ const SwapForm: React.FC = () => {
       )}
       <button
         className="bg-indigo-600 text-white mt-4 py-3 px-6 rounded-lg w-full font-semibold hover:bg-indigo-700 transition"
-        disabled={!(fromToken && toToken && fromAmount && !error)}  // Đảm bảo trả về boolean
+        disabled={!(fromToken && toToken && fromAmount && !error)}
       >
         Swap
       </button>
