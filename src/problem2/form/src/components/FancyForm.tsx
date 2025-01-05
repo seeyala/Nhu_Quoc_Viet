@@ -14,11 +14,29 @@ const SwapForm: React.FC = () => {
     axios
       .get('https://interview.switcheo.com/prices.json')
       .then(({ data }) => {
+        const predefinedIcons: Record<string, string> = {
+          BLUR: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/BLUR.svg',
+          bNEO: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/bNEO.svg',
+          BUSD: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/BUSD.svg',
+          USD: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/USD.svg',
+          ETH: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/ETH.svg',
+          GMX: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/GMX.svg',
+          LUNA: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/LUNA.svg',
+          STRD: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/STRD.svg',
+          EVMOS: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/EVMOS.svg',
+          IBCX: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/IBCX.svg',
+          IRIS: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/IRIS.svg',
+          ampLUNA: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/ampLUNA.svg',
+          KUJI: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/KUJI.svg',
+          USDC: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/USDC.svg',
+          ATOM: 'https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/ATOM.svg',
+        };
+  
         const availableTokens: TokenOption[] = data.map((item: any) => ({
           value: item.currency,
           label: item.currency,
           price: item.price,
-          icon: `https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/${item.currency}.svg` || 'default-icon.svg',
+          icon: predefinedIcons[item.currency] || `https://raw.githubusercontent.com/Switcheo/token-icons/main/tokens/${item.currency}.svg`,
         }));
         setTokens(availableTokens);
       })
@@ -33,8 +51,10 @@ const SwapForm: React.FC = () => {
       setError('');
       setFromAmount(value);
       if (fromToken && toToken) {
-        const rate = fromToken.price / toToken.price;
+        const rate = toToken.price / fromToken.price;
         setExchangeRate(rate);
+      } else {
+        setExchangeRate(null);
       }
     }
   };
@@ -64,18 +84,22 @@ const SwapForm: React.FC = () => {
         onChange={setToToken}
       />
       <div className="mt-4 text-gray-600 bg-indigo-50 rounded-md p-4">
-        <p className="flex justify-between">
-          <span>Exchange Rate:</span>
-          <span className="font-semibold text-indigo-600">
-            {exchangeRate || '--'}
-          </span>
-        </p>
-        <p className="flex justify-between mt-2">
-          <span>You will receive:</span>
-          <span className="font-semibold text-indigo-600">
-            {(Number(fromAmount) * (exchangeRate || 0)).toFixed(2)}
-          </span>
-        </p>
+      <p className="flex justify-between">
+        <span>Exchange Rate:</span>
+        <span className="font-semibold text-indigo-600">
+          {fromToken && toToken
+            ? `1 ${fromToken.label} = ${exchangeRate?.toFixed(6) || '--'} ${toToken.label}`
+            : 'Select tokens to calculate rate'}
+        </span>
+      </p>
+      <p className="flex justify-between mt-2">
+        <span>You will receive:</span>
+        <span className="font-semibold text-indigo-600">
+          {fromAmount && exchangeRate
+            ? (Number(fromAmount) * exchangeRate).toFixed(2)
+            : '--'}
+        </span>
+      </p>
       </div>
       {error && (
         <p className="text-red-500 text-sm mt-2 text-center">{error}</p>
