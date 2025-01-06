@@ -18,6 +18,7 @@ Make sure you have the following installed:
 ```bash
 git clone https://github.com/seeyala/Nhu_Quoc_Viet.git
 cd src/problem5
+```
 
 ### 2. Install dependencies
 
@@ -25,19 +26,20 @@ cd src/problem5
 npm init -y
 npm install express body-parser cors dotenv prisma @prisma/client
 npm install --save-dev typescript ts-node nodemon @types/express @types/node
+```
 
 ### 3. Prisma setup
 
 ```bash
 npx prisma init
 npx prisma generate
+```
 
 ## 5. Start the server
 
 ```bash
 npx ts-node src/server.ts
-
-
+```
 
 ## API Endpoints
 The following API endpoints are available in the application:
