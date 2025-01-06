@@ -12,5 +12,5 @@ function sum_to_n_b2(n: number): number {
 
 function sum_to_n_c2(n: number): number {
     if (n === 1) return 1;
-    return n + sum_to_n_c(n - 1);
+    return n + sum_to_n_c2(n - 1);
 }
