@@ -44,8 +44,8 @@ npx ts-node src/server.ts
 ## API Endpoints
 The following API endpoints are available in the application:
 
-GET /api/resources: List all resources. Supports basic filtering by name query parameter.
-POST /api/resources: Create a new resource. Requires name and description in the request body.
-GET /api/resources/:id: Get details of a resource by ID.
-PUT /api/resources/:id: Update an existing resource by ID. Requires name and description in the request body.
-DELETE /api/resources/:id: Delete a resource by ID.
+- GET /api/resources: List all resources. Supports basic filtering by name query parameter.
+- POST /api/resources: Create a new resource. Requires name and description in the request body.
+- GET /api/resources/:id: Get details of a resource by ID.
+- PUT /api/resources/:id: Update an existing resource by ID. Requires name and description in the request body.
+- DELETE /api/resources/:id: Delete a resource by ID.
